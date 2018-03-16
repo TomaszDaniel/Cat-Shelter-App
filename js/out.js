@@ -9622,10 +9622,26 @@ var CatRow = function (_React$Component) {
     _createClass(CatRow, [{
         key: 'render',
         value: function render() {
+            var name = this.props.kitty.likesKids ? this.props.kitty.name : _react2.default.createElement(
+                'span',
+                { style: { color: 'red' } },
+                ' ',
+                this.props.kitty.name,
+                ' '
+            );
             return _react2.default.createElement(
-                'div',
+                'tr',
                 null,
-                'catrow'
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    name
+                ),
+                _react2.default.createElement(
+                    'td',
+                    null,
+                    this.props.kitty.age
+                )
             );
         }
     }]);
@@ -9646,9 +9662,13 @@ var CatCategoryRow = function (_React$Component2) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
+                'tr',
                 null,
-                'catcategoryrow'
+                _react2.default.createElement(
+                    'th',
+                    { colSpan: '2' },
+                    this.props.category
+                )
             );
         }
     }]);
@@ -9668,11 +9688,45 @@ var CatTable = function (_React$Component3) {
     _createClass(CatTable, [{
         key: 'render',
         value: function render() {
+            var rows = []; //tworzymy pustą tablicę
+            var lastCategory = null; //zmienna przechowująca ostatnią kategorię (płeć)
+            this.props.kitties.forEach(function (kitty) {
+                //dla każdego obiekty z props.kitties
+                if (kitty.category !== lastCategory) {
+                    //jeśli pojawia się nowa kategoria (płeć kociaka)
+                    //dodaj do tablicy rows komponent CatCategoryRow
+                    rows.push(_react2.default.createElement(CatCategoryRow, { category: kitty.category, key: kitty.category }));
+                }
+                //dodaj do tablicy rows komponent CatRow
+                rows.push(_react2.default.createElement(CatRow, { kitty: kitty, key: kitty.name }));
+                lastCategory = kitty.category;
+            });
             return _react2.default.createElement(
-                'div',
+                'table',
                 null,
-                _react2.default.createElement(CatCategoryRow, null),
-                _react2.default.createElement(CatRow, null)
+                _react2.default.createElement(
+                    'thead',
+                    null,
+                    _react2.default.createElement(
+                        'tr',
+                        null,
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            'Name'
+                        ),
+                        _react2.default.createElement(
+                            'th',
+                            null,
+                            'Age'
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'tbody',
+                    null,
+                    rows
+                )
             );
         }
     }]);
@@ -9693,9 +9747,16 @@ var SearchBar = function (_React$Component4) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
+                'form',
                 null,
-                'serczbar'
+                _react2.default.createElement('input', { type: 'text', placeholder: 'Search...' }),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    ' ',
+                    _react2.default.createElement('input', { type: 'checkbox' }),
+                    ' Only show kitties that likes kids'
+                )
             );
         }
     }]);
