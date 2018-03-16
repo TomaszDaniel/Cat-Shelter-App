@@ -9608,6 +9608,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var kitties = [{ category: "male", age: "4", likesKids: true, name: "Fidel Catstro" }, { category: "male", age: "9", likesKids: true, name: "Hairy Potter" }, { category: "male", age: "2", likesKids: false, name: "Grumpy" }, { category: "female", age: "1", likesKids: true, name: "Jude Paw" }, { category: "female", age: "2", likesKids: false, name: "Lucifurr" }, { category: "female", age: "3", likesKids: true, name: "Meowly Cyrus" }];
+
 var CatRow = function (_React$Component) {
     _inherits(CatRow, _React$Component);
 
@@ -9717,7 +9719,7 @@ var App = function (_React$Component5) {
                 'div',
                 null,
                 _react2.default.createElement(SearchBar, null),
-                _react2.default.createElement(CatTable, null)
+                _react2.default.createElement(CatTable, { kitties: this.props.kitties })
             );
         }
     }]);
@@ -9729,7 +9731,7 @@ var App = function (_React$Component5) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
+    _reactDom2.default.render(_react2.default.createElement(App, { kitties: kitties }), document.getElementById('app'));
 });
 
 /***/ }),
