@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "./style.scss";
 
 var kitties = [
     {category: "male", age: "4", likesKids: true, name: "Fidel Catstro"},
